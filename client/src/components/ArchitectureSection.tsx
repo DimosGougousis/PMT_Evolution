@@ -1,4 +1,4 @@
-/* Design: Dark Command Centre — three-layer architecture with visual breakdown */
+/* Design: Apple.com — white section, clean tabs, light table */
 import { useState } from "react";
 
 const layers = [
@@ -6,7 +6,7 @@ const layers = [
     id: "business",
     label: "Business Architecture",
     subtitle: "What the business must do",
-    color: "oklch(0.65 0.18 145)",
+    accentColor: "#34c759",
     icon: "🏢",
     description: "Defines the strategic objectives, core processes, and stakeholder map. Driven by cost optimisation, regulatory compliance, and employee experience. Mission-critical processes include workforce planning, scheduling operations, and compliance monitoring.",
     elements: [
@@ -19,7 +19,7 @@ const layers = [
     id: "software",
     label: "Software Architecture",
     subtitle: "How the system enables the business",
-    color: "oklch(0.60 0.20 255)",
+    accentColor: "#0071e3",
     icon: "🖥️",
     description: "A microservices-oriented architecture with seven domain clusters, a shared compliance engine, polyglot persistence, and a mobile-first presentation layer. The Compliance Hub is isolated for higher resilience and scrutiny.",
     elements: [
@@ -32,7 +32,7 @@ const layers = [
     id: "regulatory",
     label: "Regulatory Architecture",
     subtitle: "The rules that cannot be broken",
-    color: "oklch(0.60 0.22 25)",
+    accentColor: "#ff3b30",
     icon: "⚖️",
     description: "A cascading compliance stack from EU directives down to sector-level agreements. A failure at any level creates a breach. Four new laws are entering force by January 2027, requiring immediate architectural response.",
     elements: [
@@ -60,44 +60,51 @@ export default function ArchitectureSection() {
   const active = layers.find((l) => l.id === activeLayer)!;
 
   return (
-    <section
-      id="architecture"
-      className="py-24 relative overflow-hidden"
-      style={{
-        backgroundImage: `url(https://d2xsxph8kpxj0f.cloudfront.net/112091274/JmCAtv6PPZTyefvaPPYBRx/arch_bg-RZYYV5DVsA297JXdG54vjx.webp)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="absolute inset-0" style={{ background: "oklch(0.09 0.014 255 / 93%)" }} />
-      <div className="absolute top-0 right-0 section-number" style={{ transform: "translate(5%, -10%)" }}>03</div>
-
-      <div className="container relative z-10">
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-blue-400/50" />
-            <span className="text-blue-400/70 text-xs tracking-widest uppercase" style={{ fontFamily: "Space Mono, monospace" }}>Chapter 03</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ fontFamily: "Syne, sans-serif" }}>
-            Architecture Overview
+    <section id="architecture" className="section-white" style={{ padding: "100px 0" }}>
+      <div className="container">
+        {/* Header */}
+        <div style={{ maxWidth: "680px", marginBottom: "64px" }}>
+          <div className="section-eyebrow">Chapter 03 — Architecture Overview</div>
+          <h2
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+              color: "#1d1d1f",
+              lineHeight: 1.1,
+              marginBottom: "1rem",
+            }}
+          >
+            Three interconnected architectures
           </h2>
-          <p className="text-white/55 text-lg max-w-2xl" style={{ fontFamily: "Manrope, sans-serif" }}>
-            Three distinct but interconnected architectures. Understanding how they align — and where they diverge — is the foundation of the gap analysis.
+          <p style={{ fontSize: "1.05rem", color: "#6e6e73", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
+            Understanding how Business, Software, and Regulatory architectures align — and where they diverge — is the foundation of the gap analysis.
           </p>
         </div>
 
         {/* Layer tabs */}
-        <div className="flex flex-wrap gap-3 mb-8">
+        <div
+          style={{
+            display: "flex",
+            gap: "8px",
+            marginBottom: "24px",
+            flexWrap: "wrap",
+          }}
+        >
           {layers.map((l) => (
             <button
               key={l.id}
               onClick={() => setActiveLayer(l.id)}
-              className="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200"
               style={{
-                fontFamily: "Manrope, sans-serif",
-                background: activeLayer === l.id ? `${l.color}` : "oklch(1 0 0 / 5%)",
-                color: activeLayer === l.id ? "white" : "oklch(0.65 0.005 255)",
-                border: `1px solid ${activeLayer === l.id ? l.color : "oklch(1 0 0 / 10%)"}`,
+                padding: "8px 20px",
+                borderRadius: "980px",
+                fontSize: "0.875rem",
+                fontWeight: 500,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+                background: activeLayer === l.id ? l.accentColor : "#f5f5f7",
+                color: activeLayer === l.id ? "#ffffff" : "#6e6e73",
+                border: "none",
               }}
             >
               {l.icon} {l.label}
@@ -106,19 +113,38 @@ export default function ArchitectureSection() {
         </div>
 
         {/* Active layer detail */}
-        <div className="glass-card p-8 mb-12" style={{ borderTop: `3px solid ${active.color}` }}>
-          <div className="mb-2">
-            <span className="text-xs text-white/40 uppercase tracking-wider" style={{ fontFamily: "Space Mono, monospace" }}>{active.subtitle}</span>
+        <div
+          className="apple-card"
+          style={{
+            padding: "40px",
+            marginBottom: "56px",
+            borderTop: `3px solid ${active.accentColor}`,
+          }}
+        >
+          <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#aeaeb2", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "8px" }}>
+            {active.subtitle}
           </div>
-          <p className="text-white/70 mb-8 leading-relaxed max-w-3xl" style={{ fontFamily: "Manrope, sans-serif" }}>{active.description}</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <p style={{ fontSize: "1rem", color: "#3a3a3c", lineHeight: 1.7, maxWidth: "700px", marginBottom: "36px" }}>{active.description}</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "32px" }}>
             {active.elements.map((el, i) => (
               <div key={i}>
-                <div className="text-xs uppercase tracking-wider mb-3 font-semibold" style={{ fontFamily: "Space Mono, monospace", color: active.color }}>{el.name}</div>
-                <ul className="space-y-2">
+                <div
+                  style={{
+                    fontSize: "0.72rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    color: active.accentColor,
+                    marginBottom: "12px",
+                  }}
+                >
+                  {el.name}
+                </div>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
                   {el.items.map((item, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm text-white/60" style={{ fontFamily: "Manrope, sans-serif" }}>
-                      <span style={{ color: active.color }}>▸</span>{item}
+                    <li key={j} style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "#3a3a3c" }}>
+                      <span style={{ color: active.accentColor, fontSize: "0.6rem" }}>▸</span>
+                      {item}
                     </li>
                   ))}
                 </ul>
@@ -129,32 +155,34 @@ export default function ArchitectureSection() {
 
         {/* Mission-critical systems table */}
         <div>
-          <h3 className="text-xl font-bold text-white mb-6" style={{ fontFamily: "Syne, sans-serif" }}>
+          <h3
+            style={{
+              fontSize: "1.4rem",
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
+              color: "#1d1d1f",
+              marginBottom: "20px",
+            }}
+          >
             Mission-Critical Systems Register
           </h3>
-          <div className="overflow-x-auto rounded-xl" style={{ border: "1px solid oklch(1 0 0 / 10%)" }}>
-            <table className="w-full text-sm">
+          <div className="apple-card" style={{ overflow: "hidden" }}>
+            <table className="apple-table">
               <thead>
-                <tr style={{ background: "oklch(0.14 0.015 255)", borderBottom: "1px solid oklch(1 0 0 / 10%)" }}>
-                  <th className="text-left px-5 py-3 text-white/50 font-semibold text-xs uppercase tracking-wider" style={{ fontFamily: "Space Mono, monospace" }}>System</th>
-                  <th className="text-left px-5 py-3 text-white/50 font-semibold text-xs uppercase tracking-wider" style={{ fontFamily: "Space Mono, monospace" }}>RTO</th>
-                  <th className="text-left px-5 py-3 text-white/50 font-semibold text-xs uppercase tracking-wider" style={{ fontFamily: "Space Mono, monospace" }}>Failure Consequence</th>
-                  <th className="text-left px-5 py-3 text-white/50 font-semibold text-xs uppercase tracking-wider" style={{ fontFamily: "Space Mono, monospace" }}>Status</th>
+                <tr>
+                  <th>System</th>
+                  <th>Recovery Time Objective</th>
+                  <th>Failure Consequence</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 {missionCritical.map((row, i) => (
-                  <tr
-                    key={i}
-                    style={{
-                      background: i % 2 === 0 ? "oklch(0.12 0.013 255)" : "oklch(0.13 0.014 255)",
-                      borderBottom: "1px solid oklch(1 0 0 / 6%)",
-                    }}
-                  >
-                    <td className="px-5 py-3 text-white/80 font-medium" style={{ fontFamily: "Manrope, sans-serif" }}>{row.name}</td>
-                    <td className="px-5 py-3 text-white/50" style={{ fontFamily: "Space Mono, monospace", fontSize: "0.75rem" }}>{row.rto}</td>
-                    <td className="px-5 py-3 text-white/55" style={{ fontFamily: "Manrope, sans-serif" }}>{row.consequence}</td>
-                    <td className="px-5 py-3">
+                  <tr key={i}>
+                    <td style={{ fontWeight: 500, color: "#1d1d1f" }}>{row.name}</td>
+                    <td style={{ color: "#6e6e73", fontSize: "0.8rem", fontFamily: "monospace" }}>{row.rto}</td>
+                    <td style={{ color: "#6e6e73" }}>{row.consequence}</td>
+                    <td>
                       {row.status === "covered" ? (
                         <span className="badge-covered">Covered</span>
                       ) : (

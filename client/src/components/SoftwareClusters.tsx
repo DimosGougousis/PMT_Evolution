@@ -1,4 +1,4 @@
-/* Design: Dark Command Centre — 7 software clusters with capability breakdown */
+/* Design: Apple.com — grey section background, white expandable cluster cards */
 import { useState } from "react";
 
 const clusters = [
@@ -8,7 +8,7 @@ const clusters = [
     icon: "🏪",
     priority: "Mission Critical",
     priorityBadge: "badge-critical",
-    color: "oklch(0.60 0.22 25)",
+    accentColor: "#ff3b30",
     description: "The operational core. Enables branch managers to create, publish, and manage shift schedules while enforcing ATW working-time rules in real time.",
     capabilities: [
       "Drag-and-drop shift builder with ATW constraint engine",
@@ -25,7 +25,7 @@ const clusters = [
     icon: "⚖️",
     priority: "Mission Critical",
     priorityBadge: "badge-critical",
-    color: "oklch(0.60 0.22 25)",
+    accentColor: "#ff3b30",
     description: "The regulatory engine of the platform. Houses the CAO Rule Engine, ATW Guard, WTTA certification tracker, GDPR module, and the EU AI Act conformity module.",
     capabilities: [
       "CAO Supermarkt rule engine (premiums, rest periods, age rules)",
@@ -42,7 +42,7 @@ const clusters = [
     icon: "👥",
     priority: "High Priority",
     priorityBadge: "badge-warning",
-    color: "oklch(0.75 0.18 75)",
+    accentColor: "#ff9500",
     description: "Manages the full lifecycle of the flex workforce — from uitzendkrachten onboarding through contract phase tracking (A/B/C) to temp-to-perm conversion.",
     capabilities: [
       "Flex pool registry with contract phase tracking (A/B/C)",
@@ -59,7 +59,7 @@ const clusters = [
     icon: "📈",
     priority: "High Priority",
     priorityBadge: "badge-warning",
-    color: "oklch(0.75 0.18 75)",
+    accentColor: "#ff9500",
     description: "AI-powered demand forecasting using historical sales, footfall, and seasonal patterns to generate optimal staffing recommendations — with full EU AI Act compliance.",
     capabilities: [
       "ML-based demand forecasting (sales, footfall, events)",
@@ -76,7 +76,7 @@ const clusters = [
     icon: "📱",
     priority: "Standard",
     priorityBadge: "badge-info",
-    color: "oklch(0.60 0.20 255)",
+    accentColor: "#0071e3",
     description: "Mobile-first employee portal for availability management, shift viewing, swap requests, and AI scheduling explanation — building trust and reducing manager workload.",
     capabilities: [
       "Mobile app (iOS/Android) for shift viewing and availability",
@@ -93,7 +93,7 @@ const clusters = [
     icon: "🕐",
     priority: "Mission Critical",
     priorityBadge: "badge-critical",
-    color: "oklch(0.60 0.22 25)",
+    accentColor: "#ff3b30",
     description: "Accurate time recording is the primary defence against ATW record-keeping fines (€10,000 flat). Supports multiple clock-in methods with discrepancy management.",
     capabilities: [
       "Multi-method clock-in (app, terminal, NFC badge)",
@@ -110,7 +110,7 @@ const clusters = [
     icon: "📊",
     priority: "Standard",
     priorityBadge: "badge-info",
-    color: "oklch(0.60 0.20 255)",
+    accentColor: "#0071e3",
     description: "Board-level and operational dashboards, regulatory compliance reports, pay gap reporting, and the incident response module for data breaches.",
     capabilities: [
       "Labour cost and efficiency KPI dashboards",
@@ -127,77 +127,116 @@ export default function SoftwareClusters() {
   const [active, setActive] = useState<string | null>(null);
 
   return (
-    <section id="software-clusters" className="py-24 relative overflow-hidden" style={{ background: "oklch(0.10 0.012 255)" }}>
-      <div className="absolute top-0 left-0 section-number" style={{ transform: "translate(-5%, -10%)" }}>02</div>
-
-      <div className="container relative z-10">
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-blue-400/50" />
-            <span className="text-blue-400/70 text-xs tracking-widest uppercase" style={{ fontFamily: "Space Mono, monospace" }}>Chapter 02</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ fontFamily: "Syne, sans-serif" }}>
-            Software Clusters
+    <section id="software-clusters" className="section-grey" style={{ padding: "100px 0" }}>
+      <div className="container">
+        {/* Header */}
+        <div style={{ maxWidth: "680px", marginBottom: "64px" }}>
+          <div className="section-eyebrow">Chapter 02 — Software Clusters</div>
+          <h2
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+              color: "#1d1d1f",
+              lineHeight: 1.1,
+              marginBottom: "1rem",
+            }}
+          >
+            Seven modular clusters
           </h2>
-          <p className="text-white/55 text-lg max-w-2xl" style={{ fontFamily: "Manrope, sans-serif" }}>
-            Seven independently deployable modules, each owning a specific business domain. Click any cluster to expand its capability breakdown and compliance standards.
+          <p style={{ fontSize: "1.05rem", color: "#6e6e73", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
+            Each cluster owns a specific business domain and can be deployed independently. Click any cluster to expand its capability breakdown and compliance standards.
           </p>
         </div>
 
         {/* Priority legend */}
-        <div className="flex flex-wrap gap-4 mb-10">
-          <div className="flex items-center gap-2"><span className="badge-critical">Mission Critical</span><span className="text-white/40 text-xs" style={{ fontFamily: "Manrope, sans-serif" }}>Failure = immediate regulatory liability</span></div>
-          <div className="flex items-center gap-2"><span className="badge-warning">High Priority</span><span className="text-white/40 text-xs" style={{ fontFamily: "Manrope, sans-serif" }}>Required for Jan 2027 deadlines</span></div>
-          <div className="flex items-center gap-2"><span className="badge-info">Standard</span><span className="text-white/40 text-xs" style={{ fontFamily: "Manrope, sans-serif" }}>Commercial value driver</span></div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", marginBottom: "40px", alignItems: "center" }}>
+          <span className="badge-critical">Mission Critical</span>
+          <span style={{ fontSize: "0.78rem", color: "#8e8e93" }}>Failure = immediate regulatory liability</span>
+          <span style={{ color: "#e5e5ea" }}>·</span>
+          <span className="badge-warning">High Priority</span>
+          <span style={{ fontSize: "0.78rem", color: "#8e8e93" }}>Required for Jan 2027 deadlines</span>
+          <span style={{ color: "#e5e5ea" }}>·</span>
+          <span className="badge-info">Standard</span>
+          <span style={{ fontSize: "0.78rem", color: "#8e8e93" }}>Commercial value driver</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {/* Cluster cards */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gap: "16px",
+          }}
+        >
           {clusters.map((c) => (
             <div
               key={c.id}
-              className="glass-card p-5 cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+              className="apple-card"
               style={{
-                borderLeft: `3px solid ${c.color}`,
-                background: active === c.id ? "oklch(1 0 0 / 8%)" : undefined,
+                padding: "24px",
+                cursor: "pointer",
+                borderTop: `3px solid ${c.accentColor}`,
               }}
               onClick={() => setActive(active === c.id ? null : c.id)}
             >
-              <div className="flex items-start justify-between mb-3">
-                <div>
-                  <span className="text-white/30 text-xs font-mono mr-2">{c.id}</span>
-                  <span className="text-xl">{c.icon}</span>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span style={{ fontSize: "0.7rem", fontWeight: 600, color: "#aeaeb2", letterSpacing: "0.04em" }}>{c.id}</span>
+                  <span style={{ fontSize: "1.4rem" }}>{c.icon}</span>
                 </div>
                 <span className={c.priorityBadge}>{c.priority}</span>
               </div>
-              <h3 className="font-bold text-white mb-2 text-sm leading-snug" style={{ fontFamily: "Syne, sans-serif" }}>{c.title}</h3>
-              <p className="text-white/50 text-xs leading-relaxed mb-3" style={{ fontFamily: "Manrope, sans-serif" }}>{c.description}</p>
+
+              <h3
+                style={{
+                  fontWeight: 600,
+                  fontSize: "0.95rem",
+                  color: "#1d1d1f",
+                  marginBottom: "8px",
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1.3,
+                }}
+              >
+                {c.title}
+              </h3>
+              <p style={{ fontSize: "0.825rem", color: "#6e6e73", lineHeight: 1.6, marginBottom: "12px" }}>{c.description}</p>
 
               {active === c.id && (
-                <div className="mt-4 pt-4 border-t border-white/10">
-                  <div className="mb-3">
-                    <div className="text-xs text-white/40 uppercase tracking-wider mb-2" style={{ fontFamily: "Space Mono, monospace" }}>Capabilities</div>
-                    <ul className="space-y-1.5">
-                      {c.capabilities.map((cap, i) => (
-                        <li key={i} className="flex items-start gap-2 text-xs text-white/60" style={{ fontFamily: "Manrope, sans-serif" }}>
-                          <span style={{ color: c.color, marginTop: "2px" }}>▸</span>
-                          {cap}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <div className="text-xs text-white/40 uppercase tracking-wider mb-2" style={{ fontFamily: "Space Mono, monospace" }}>Standards</div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {c.standards.map((s, i) => (
-                        <span key={i} className="text-xs px-2 py-0.5 rounded" style={{ fontFamily: "Space Mono, monospace", background: "oklch(1 0 0 / 6%)", color: "oklch(0.65 0.005 255)", border: "1px solid oklch(1 0 0 / 10%)" }}>{s}</span>
-                      ))}
-                    </div>
+                <div style={{ marginTop: "16px", paddingTop: "16px", borderTop: "1px solid #f2f2f7" }}>
+                  <div style={{ fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aeaeb2", marginBottom: "10px" }}>Capabilities</div>
+                  <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: "6px" }}>
+                    {c.capabilities.map((cap, i) => (
+                      <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "0.8rem", color: "#3a3a3c" }}>
+                        <span style={{ color: c.accentColor, marginTop: "1px", flexShrink: 0 }}>▸</span>
+                        {cap}
+                      </li>
+                    ))}
+                  </ul>
+                  <div style={{ fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aeaeb2", marginBottom: "8px" }}>Standards</div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                    {c.standards.map((s, i) => (
+                      <span
+                        key={i}
+                        style={{
+                          fontSize: "0.7rem",
+                          padding: "3px 9px",
+                          borderRadius: "6px",
+                          background: "#f5f5f7",
+                          color: "#6e6e73",
+                          border: "1px solid #e5e5ea",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {s}
+                      </span>
+                    ))}
                   </div>
                 </div>
               )}
 
-              <div className="text-xs text-white/30 mt-2" style={{ fontFamily: "Space Mono, monospace" }}>
-                {active === c.id ? "▲ Collapse" : "▼ Expand"}
+              <div style={{ fontSize: "0.72rem", color: "#aeaeb2", marginTop: "10px" }}>
+                {active === c.id ? "▲ Collapse" : "▼ Expand details"}
               </div>
             </div>
           ))}

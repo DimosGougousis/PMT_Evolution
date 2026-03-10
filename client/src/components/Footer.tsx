@@ -1,38 +1,104 @@
-/* Design: Dark Command Centre — minimal footer */
+/* Design: Apple.com — clean minimal footer with Dimos Gougousis authorship */
 export default function Footer() {
   return (
     <footer
-      className="py-12 border-t"
-      style={{ background: "oklch(0.09 0.012 255)", borderColor: "oklch(1 0 0 / 8%)" }}
+      style={{
+        background: "#f5f5f7",
+        borderTop: "1px solid #e5e5ea",
+        padding: "48px 0 32px",
+      }}
     >
       <div className="container">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        {/* Top row */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            gap: "2rem",
+            marginBottom: "32px",
+          }}
+        >
+          {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-2">
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
               <div
-                className="w-7 h-7 rounded flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, oklch(0.60 0.20 255), oklch(0.50 0.22 280))" }}
+                style={{
+                  width: "28px",
+                  height: "28px",
+                  borderRadius: "7px",
+                  background: "#0071e3",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                }}
               >
-                <span className="text-white font-bold text-xs" style={{ fontFamily: "Syne, sans-serif" }}>PMT</span>
+                <span style={{ color: "white", fontWeight: 700, fontSize: "10px" }}>PMT</span>
               </div>
-              <span className="font-bold text-white/80" style={{ fontFamily: "Syne, sans-serif" }}>PMT Evolution</span>
+              <span
+                style={{
+                  fontWeight: 600,
+                  fontSize: "0.9rem",
+                  color: "#1d1d1f",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                PMT SaaS Strategy and Roadmap
+              </span>
             </div>
-            <p className="text-white/35 text-xs max-w-sm leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
-              Shift & Resource Management SaaS Strategy. Prepared for board-level review, March 2026.
+            <p
+              style={{
+                fontSize: "0.78rem",
+                color: "#8e8e93",
+                maxWidth: "320px",
+                lineHeight: 1.6,
+              }}
+            >
+              Shift and Resource Management platform strategy for the Dutch supermarket sector. Prepared for board-level review.
             </p>
           </div>
 
-          <div className="text-right">
-            <div className="text-white/25 text-xs mb-1" style={{ fontFamily: "Space Mono, monospace" }}>Classification</div>
-            <div className="text-white/50 text-xs" style={{ fontFamily: "Space Mono, monospace" }}>INTERNAL — CONFIDENTIAL</div>
-            <div className="text-white/25 text-xs mt-2" style={{ fontFamily: "Space Mono, monospace" }}>Version 1.0 · March 2026</div>
+          {/* Meta */}
+          <div style={{ textAlign: "right" }}>
+            <div style={{ fontSize: "0.7rem", color: "#aeaeb2", marginBottom: "4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
+              Author
+            </div>
+            <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "#1d1d1f", marginBottom: "12px" }}>
+              Dimos Gougousis
+            </div>
+            <div style={{ fontSize: "0.7rem", color: "#aeaeb2", marginBottom: "4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
+              Classification
+            </div>
+            <div style={{ fontSize: "0.78rem", color: "#6e6e73" }}>
+              Internal — Confidential
+            </div>
+            <div style={{ fontSize: "0.72rem", color: "#aeaeb2", marginTop: "8px" }}>
+              Version 1.0 · March 2026
+            </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t flex flex-wrap gap-4 text-xs text-white/25" style={{ borderColor: "oklch(1 0 0 / 6%)", fontFamily: "Manrope, sans-serif" }}>
-          <span>Research: Dutch ATW, CAO Supermarkt, GDPR, EU AI Act, WTTA, Wet meer zekerheid flexwerkers</span>
-          <span>·</span>
-          <span>Standards: ISO 27001, ISO 42001, SOC 2, NIST CSF 2.0, TOGAF 10</span>
+        {/* Divider */}
+        <hr style={{ border: "none", borderTop: "1px solid #e5e5ea", margin: "0 0 20px" }} />
+
+        {/* Bottom row */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
+          <p style={{ fontSize: "0.72rem", color: "#aeaeb2", lineHeight: 1.6, maxWidth: "600px" }}>
+            Research basis: Dutch ATW · CAO Supermarkt · GDPR · EU AI Act · WTTA · Wet meer zekerheid flexwerkers · Pay Transparency Directive
+          </p>
+          <p style={{ fontSize: "0.72rem", color: "#aeaeb2" }}>
+            Standards: ISO 27001 · ISO 42001 · SOC 2 · NIST CSF 2.0 · TOGAF 10
+          </p>
         </div>
       </div>
     </footer>

@@ -1,8 +1,8 @@
-/* Design: Dark Command Centre — sticky top navigation with progress bar and section anchors */
+/* Design: Apple.com — frosted glass nav, minimal, precise typography */
 import { useEffect, useState } from "react";
 
 const navItems = [
-  { id: "executive-summary", label: "Executive Brief" },
+  { id: "hero", label: "Executive Brief" },
   { id: "market-context", label: "Market Context" },
   { id: "software-clusters", label: "Software Clusters" },
   { id: "architecture", label: "Architecture" },
@@ -13,20 +13,16 @@ const navItems = [
 ];
 
 export default function Navigation() {
-  const [activeSection, setActiveSection] = useState("executive-summary");
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("hero");
+  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
-
-      // Determine active section
+      setScrolled(window.scrollY > 20);
       for (let i = navItems.length - 1; i >= 0; i--) {
         const el = document.getElementById(navItems[i].id);
-        if (el && el.getBoundingClientRect().top <= 120) {
+        if (el && el.getBoundingClientRect().top <= 100) {
           setActiveSection(navItems[i].id);
           break;
         }
@@ -42,83 +38,143 @@ export default function Navigation() {
   };
 
   return (
-    <>
-      {/* Progress bar */}
+    <nav
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        background: scrolled ? "rgba(255,255,255,0.88)" : "rgba(255,255,255,0.72)",
+        backdropFilter: "saturate(180%) blur(20px)",
+        WebkitBackdropFilter: "saturate(180%) blur(20px)",
+        borderBottom: scrolled ? "1px solid #e5e5ea" : "1px solid transparent",
+        transition: "border-color 0.3s ease, background 0.3s ease",
+      }}
+    >
       <div
-        id="progress-bar"
-        style={{ width: `${scrollProgress}%` }}
-      />
-
-      {/* Nav bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/8"
-        style={{ background: "oklch(0.10 0.012 255 / 90%)", backdropFilter: "blur(16px)" }}>
-        <div className="container">
-          <div className="flex items-center justify-between h-14">
-            {/* Logo */}
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="w-7 h-7 rounded flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, oklch(0.60 0.20 255), oklch(0.50 0.22 280))" }}>
-                <span className="text-white font-bold text-xs" style={{ fontFamily: "Syne, sans-serif" }}>PMT</span>
-              </div>
-              <span className="font-bold text-sm text-white/90 hidden sm:block" style={{ fontFamily: "Syne, sans-serif" }}>
-                PMT Evolution
-              </span>
-              <span className="text-white/30 text-xs hidden md:block" style={{ fontFamily: "Space Mono, monospace" }}>
-                SaaS Strategy 2026
-              </span>
-            </div>
-
-            {/* Desktop nav */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollTo(item.id)}
-                  className="px-3 py-1.5 rounded text-xs font-medium transition-all duration-200"
-                  style={{
-                    fontFamily: "Manrope, sans-serif",
-                    color: activeSection === item.id ? "oklch(0.72 0.18 255)" : "oklch(0.60 0.005 255)",
-                    background: activeSection === item.id ? "oklch(0.60 0.20 255 / 12%)" : "transparent",
-                    borderBottom: activeSection === item.id ? "1px solid oklch(0.60 0.20 255 / 50%)" : "1px solid transparent",
-                  }}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile menu button */}
-            <button
-              className="lg:hidden p-2 text-white/60 hover:text-white"
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              <div className="w-5 h-0.5 bg-current mb-1" />
-              <div className="w-5 h-0.5 bg-current mb-1" />
-              <div className="w-5 h-0.5 bg-current" />
-            </button>
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "0 1.5rem",
+          height: "52px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "1rem",
+        }}
+      >
+        {/* Logo */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
+          <div
+            style={{
+              width: "28px",
+              height: "28px",
+              borderRadius: "7px",
+              background: "#0071e3",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <span style={{ color: "white", fontWeight: 700, fontSize: "10px", letterSpacing: "-0.02em" }}>PMT</span>
           </div>
+          <span
+            style={{
+              fontWeight: 600,
+              fontSize: "0.875rem",
+              color: "#1d1d1f",
+              letterSpacing: "-0.01em",
+              whiteSpace: "nowrap",
+            }}
+          >
+            SaaS Strategy & Roadmap
+          </span>
         </div>
 
-        {/* Mobile menu */}
-        {menuOpen && (
-          <div className="lg:hidden border-t border-white/8 py-2"
-            style={{ background: "oklch(0.12 0.014 255)" }}>
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollTo(item.id)}
-                className="w-full text-left px-6 py-2.5 text-sm transition-colors"
-                style={{
-                  fontFamily: "Manrope, sans-serif",
-                  color: activeSection === item.id ? "oklch(0.72 0.18 255)" : "oklch(0.65 0.005 255)",
-                }}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </nav>
-    </>
+        {/* Desktop nav */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "2px",
+          }}
+          className="hidden lg:flex"
+        >
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              style={{
+                padding: "5px 11px",
+                borderRadius: "980px",
+                fontSize: "0.775rem",
+                fontWeight: activeSection === item.id ? 600 : 400,
+                color: activeSection === item.id ? "#0071e3" : "#6e6e73",
+                background: activeSection === item.id ? "rgba(0,113,227,0.08)" : "transparent",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Mobile menu button */}
+        <button
+          className="lg:hidden"
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{
+            background: "none",
+            border: "none",
+            color: "#1d1d1f",
+            cursor: "pointer",
+            padding: "4px",
+            fontSize: "1.1rem",
+          }}
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div
+          style={{
+            background: "rgba(255,255,255,0.97)",
+            backdropFilter: "blur(20px)",
+            borderTop: "1px solid #e5e5ea",
+            padding: "0.5rem 1.5rem 1rem",
+          }}
+          className="lg:hidden"
+        >
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              style={{
+                display: "block",
+                width: "100%",
+                textAlign: "left",
+                padding: "10px 0",
+                fontSize: "0.95rem",
+                fontWeight: activeSection === item.id ? 600 : 400,
+                color: activeSection === item.id ? "#0071e3" : "#1d1d1f",
+                background: "none",
+                border: "none",
+                borderBottom: "1px solid #f2f2f7",
+                cursor: "pointer",
+              }}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </nav>
   );
 }

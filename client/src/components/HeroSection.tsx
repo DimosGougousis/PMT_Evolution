@@ -1,146 +1,161 @@
-/* Design: Dark Command Centre — cinematic hero with animated stats counter */
-import { useEffect, useRef, useState } from "react";
-
-function CountUp({ target, suffix = "", prefix = "" }: { target: number; suffix?: string; prefix?: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          const duration = 1800;
-          const steps = 60;
-          const increment = target / steps;
-          let current = 0;
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-              setCount(target);
-              clearInterval(timer);
-            } else {
-              setCount(Math.floor(current));
-            }
-          }, duration / steps);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [target]);
-
-  return (
-    <span ref={ref}>
-      {prefix}{count.toLocaleString()}{suffix}
-    </span>
-  );
-}
+/* Design: Apple.com — large centred headline, light background, generous whitespace */
+import { useEffect, useState } from "react";
 
 const stats = [
-  { value: 290, suffix: "M+", prefix: "€", label: "Max GDPR Fine Exposure", color: "oklch(0.60 0.22 25)" },
-  { value: 15, suffix: "M", prefix: "€", label: "Max EU AI Act Penalty", color: "oklch(0.75 0.18 75)" },
-  { value: 4, suffix: " Gaps", prefix: "", label: "Critical Regulatory Gaps", color: "oklch(0.60 0.22 25)" },
-  { value: 7, suffix: " Clusters", prefix: "", label: "Software Modules Defined", color: "oklch(0.60 0.20 255)" },
-  { value: 18, suffix: " Months", prefix: "", label: "Strategic Horizon", color: "oklch(0.65 0.18 145)" },
+  { value: "7", label: "Software Clusters" },
+  { value: "4", label: "Critical Compliance Gaps" },
+  { value: "€290M", label: "Max Fine Exposure" },
+  { value: "Jan 2027", label: "Next Regulatory Cliff" },
 ];
 
 export default function HeroSection() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <section
-      id="executive-summary"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
-      style={{ paddingTop: "5rem" }}
+      id="hero"
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: `url(https://d2xsxph8kpxj0f.cloudfront.net/112091274/JmCAtv6PPZTyefvaPPYBRx/apple_hero_bg-jc7NuqnZgX4oJ9MU6DXiM6.webp) center/cover no-repeat`,
+        paddingTop: "52px",
+        textAlign: "center",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
-      {/* Background image */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(https://d2xsxph8kpxj0f.cloudfront.net/112091274/JmCAtv6PPZTyefvaPPYBRx/hero_bg-hunufDUg4oCrrh7yQL3hSP.webp)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      {/* Dark overlay */}
-      <div className="absolute inset-0 z-0" style={{ background: "linear-gradient(135deg, oklch(0.08 0.015 255 / 92%) 0%, oklch(0.10 0.012 255 / 85%) 100%)" }} />
+      {/* Subtle white overlay for text legibility */}
+      <div style={{ position: "absolute", inset: 0, background: "rgba(255,255,255,0.55)" }} />
 
-      <div className="container relative z-10 py-20">
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "900px",
+          margin: "0 auto",
+          padding: "0 1.5rem",
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(30px)",
+          transition: "opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1)",
+        }}
+      >
         {/* Eyebrow */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-px w-12 bg-blue-400/60" />
-          <span className="text-blue-400/80 text-xs font-medium tracking-widest uppercase" style={{ fontFamily: "Space Mono, monospace" }}>
-            Board Strategy Briefing — March 2026
+        <div
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            background: "rgba(0,113,227,0.08)",
+            border: "1px solid rgba(0,113,227,0.18)",
+            borderRadius: "980px",
+            padding: "6px 16px",
+            marginBottom: "2rem",
+          }}
+        >
+          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#0071e3", display: "inline-block" }} />
+          <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "#0071e3", letterSpacing: "0.04em" }}>
+            BOARD STRATEGY BRIEFING — MARCH 2026
           </span>
         </div>
 
         {/* Main headline */}
         <h1
-          className="font-extrabold text-white leading-none mb-6"
           style={{
-            fontFamily: "Syne, sans-serif",
-            fontSize: "clamp(2.8rem, 7vw, 6rem)",
-            maxWidth: "900px",
+            fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+            fontWeight: 700,
+            letterSpacing: "-0.04em",
+            lineHeight: 1.05,
+            color: "#1d1d1f",
+            marginBottom: "1.5rem",
           }}
         >
-          Shift & Resource
+          PMT SaaS Strategy
           <br />
-          <span style={{ color: "oklch(0.72 0.18 255)" }}>Management</span>
-          <br />
-          SaaS Strategy
+          <span style={{ color: "#0071e3" }}>and Roadmap</span>
         </h1>
 
         {/* Subtitle */}
         <p
-          className="text-white/60 mb-10 leading-relaxed"
-          style={{ fontFamily: "Manrope, sans-serif", fontSize: "1.125rem", maxWidth: "640px" }}
+          style={{
+            fontSize: "clamp(1rem, 2.5vw, 1.3rem)",
+            fontWeight: 400,
+            color: "#6e6e73",
+            lineHeight: 1.6,
+            maxWidth: "640px",
+            margin: "0 auto 2.5rem",
+            letterSpacing: "-0.01em",
+          }}
         >
-          A comprehensive product strategy for the Dutch supermarket workforce management platform — covering software architecture, regulatory compliance, and the 18-month remediation roadmap.
+          A comprehensive product strategy for the Dutch supermarket workforce management platform — covering software architecture, regulatory compliance, and the 18-month delivery roadmap.
         </p>
 
         {/* CTA buttons */}
-        <div className="flex flex-wrap gap-4 mb-16">
+        <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", marginBottom: "5rem" }}>
           <button
+            className="apple-btn"
             onClick={() => document.getElementById("market-context")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-6 py-3 rounded-lg font-semibold text-sm text-white transition-all duration-200 hover:scale-105"
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              background: "linear-gradient(135deg, oklch(0.60 0.20 255), oklch(0.50 0.22 280))",
-              boxShadow: "0 0 24px oklch(0.60 0.20 255 / 30%)",
-            }}
           >
-            Begin Briefing →
+            Explore the Strategy ↓
           </button>
           <button
-            onClick={() => document.getElementById("roadmap")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-white/10"
-            style={{
-              fontFamily: "Manrope, sans-serif",
-              color: "oklch(0.75 0.005 255)",
-              border: "1px solid oklch(1 0 0 / 15%)",
-            }}
+            className="apple-btn-outline"
+            onClick={() => document.getElementById("gap-analysis")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Jump to Roadmap
+            View Gap Analysis
           </button>
         </div>
 
-        {/* Stats row */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {stats.map((stat, i) => (
+        {/* Stats bar */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "1px",
+            background: "#e5e5ea",
+            borderRadius: "18px",
+            overflow: "hidden",
+            border: "1px solid #e5e5ea",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
+          }}
+        >
+          {stats.map((s, i) => (
             <div
               key={i}
-              className="glass-card p-4"
-              style={{ borderTop: `2px solid ${stat.color}` }}
+              style={{
+                background: "rgba(255,255,255,0.92)",
+                padding: "1.5rem 1rem",
+                textAlign: "center",
+              }}
             >
               <div
-                className="text-2xl font-bold mb-1"
-                style={{ fontFamily: "Syne, sans-serif", color: stat.color }}
+                style={{
+                  fontSize: "clamp(1.4rem, 3vw, 2rem)",
+                  fontWeight: 700,
+                  letterSpacing: "-0.03em",
+                  color: "#1d1d1f",
+                  lineHeight: 1,
+                  marginBottom: "0.4rem",
+                }}
               >
-                <CountUp target={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
+                {s.value}
               </div>
-              <div className="text-xs text-white/50" style={{ fontFamily: "Manrope, sans-serif" }}>
-                {stat.label}
+              <div
+                style={{
+                  fontSize: "0.72rem",
+                  color: "#8e8e93",
+                  fontWeight: 500,
+                  letterSpacing: "0.01em",
+                }}
+              >
+                {s.label}
               </div>
             </div>
           ))}
@@ -148,10 +163,30 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/30">
-        <span className="text-xs tracking-widest uppercase" style={{ fontFamily: "Space Mono, monospace", fontSize: "0.6rem" }}>Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent animate-pulse" />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "2rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "6px",
+          opacity: 0.4,
+          animation: "bounce 2s infinite",
+        }}
+      >
+        <div style={{ width: "1px", height: "40px", background: "#1d1d1f" }} />
+        <span style={{ fontSize: "0.65rem", color: "#1d1d1f", letterSpacing: "0.1em", textTransform: "uppercase" }}>Scroll</span>
       </div>
+
+      <style>{`
+        @keyframes bounce {
+          0%, 100% { transform: translateX(-50%) translateY(0); }
+          50% { transform: translateX(-50%) translateY(6px); }
+        }
+      `}</style>
     </section>
   );
 }

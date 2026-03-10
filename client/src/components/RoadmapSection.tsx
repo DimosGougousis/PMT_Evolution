@@ -1,83 +1,95 @@
-/* Design: Dark Command Centre — 18-month roadmap with phase breakdown */
+/* Design: Apple.com — white section, clean timeline with phase cards */
 import { useState } from "react";
 
 const phases = [
   {
-    id: "P0",
-    label: "Foundation",
-    period: "Mar – Apr 2026",
-    sprints: "Sprints 1–2",
-    color: "oklch(0.60 0.20 255)",
-    status: "Now",
-    statusBadge: "badge-critical",
-    description: "Establish the shared infrastructure that all subsequent compliance work depends on. This phase is the prerequisite for everything else.",
+    id: "P1",
+    label: "Phase 1",
+    title: "Foundation & GDPR",
+    period: "Mar – May 2026",
+    sprints: "Sprints 1–5",
+    deadline: "Ongoing (overdue)",
+    accentColor: "#ff3b30",
+    statusLabel: "Start Now",
+    description: "Lay the shared compliance infrastructure and close the one gap that is already in force: the GDPR 72-hour breach notification obligation.",
     deliverables: [
       { name: "Encrypted Audit Log Infrastructure", team: "Engineering", priority: "critical" },
-      { name: "RBAC Hardening & Security Audit", team: "Engineering / Security", priority: "critical" },
+      { name: "RBAC Hardening (principle of least privilege)", team: "Engineering / Security", priority: "critical" },
       { name: "GDPR Breach Detection Alerting", team: "Engineering", priority: "critical" },
-      { name: "72-Hour Breach Notification Workflow", team: "Engineering / Legal", priority: "critical" },
+      { name: "72-Hour AP Notification Workflow", team: "Engineering / Legal", priority: "critical" },
+      { name: "Data Subject Rights Portal", team: "Engineering / UX", priority: "warning" },
     ],
-    milestone: "GDPR Breach workflow live",
-  },
-  {
-    id: "P1",
-    label: "EU AI Act Compliance",
-    period: "Apr – Aug 2026",
-    sprints: "Sprints 3–9",
-    color: "oklch(0.60 0.22 25)",
-    status: "⏰ Aug 2, 2026",
-    statusBadge: "badge-warning",
-    description: "The most complex phase. Three parallel workstreams (Engineering, Data Science, Legal) must converge before the August 2 deadline. The Works Council consultation is the critical path risk.",
-    deliverables: [
-      { name: "AI Conformity Assessment Documentation", team: "Legal / Product", priority: "critical" },
-      { name: "Human Oversight UI (Manager Dashboard)", team: "Engineering / UX", priority: "critical" },
-      { name: "Bias Monitoring Module", team: "Data Science", priority: "critical" },
-      { name: "Works Council AI Consultation", team: "Product / HR", priority: "critical" },
-      { name: "AI System Registration (EU Database)", team: "Legal", priority: "critical" },
-    ],
-    milestone: "EU AI Act Deadline: Aug 2, 2026",
+    standards: ["ISO 27001 ISMS initiation", "GDPR Art. 33 & 34"],
+    teams: ["Security Engineering", "Legal/DPO", "Backend"],
   },
   {
     id: "P2",
-    label: "WTTA & Basic Contract",
-    period: "Jul – Dec 2026",
-    sprints: "Sprints 9–16",
-    color: "oklch(0.75 0.18 75)",
-    status: "⏰ Jan 1, 2027",
-    statusBadge: "badge-warning",
-    description: "Two parallel streams sharing the same January 1, 2027 deadline. The Scheduling Hard-Block Engine is the most critical single feature in the entire programme — it is the last line of defence against WTTA fines.",
+    label: "Phase 2",
+    title: "EU AI Act Conformity",
+    period: "Jun – Aug 2026",
+    sprints: "Sprints 6–10",
+    deadline: "Aug 2, 2026",
+    accentColor: "#ff9500",
+    statusLabel: "Hard Deadline",
+    description: "Build the EU AI Act conformity module before the August 2 deadline. This is the highest-priority engineering workstream in the programme.",
     deliverables: [
-      { name: "Agency Data Model & WTTA Register", team: "Engineering", priority: "critical" },
-      { name: "WTTA Certification API Integration", team: "Engineering", priority: "critical" },
-      { name: "Scheduling Hard-Block Engine", team: "Engineering", priority: "critical" },
-      { name: "Basic Contract Type & Min Hours Engine", team: "Engineering", priority: "critical" },
-      { name: "Payroll Export Connector Update", team: "Engineering", priority: "warning" },
-      { name: "Employee ESS Contract View", team: "Engineering / UX", priority: "info" },
+      { name: "AI System Registration (EU Art. 51 database)", team: "Legal", priority: "critical" },
+      { name: "Human Oversight UI (manager approval required)", team: "Engineering / UX", priority: "critical" },
+      { name: "AI Decision Audit Trail (immutable log)", team: "Engineering", priority: "critical" },
+      { name: "Bias Monitoring Dashboard", team: "Data Science", priority: "critical" },
+      { name: "Works Council (OR) Consultation", team: "Product / HR", priority: "critical" },
+      { name: "AI Transparency Disclosure (employee-facing)", team: "Engineering / UX", priority: "warning" },
     ],
-    milestone: "WTTA & Basic Contract Deadline: Jan 1, 2027",
+    standards: ["ISO 42001", "EU AI Act Annex III", "IEEE 7000"],
+    teams: ["AI/ML Engineering", "Frontend", "Legal", "Works Council"],
+    criticalPath: "Works Council consultation must begin Sprint 3 (informally) to avoid blocking Sprint 7.",
   },
   {
     id: "P3",
-    label: "Pay Transparency & ISO 27001",
+    label: "Phase 3",
+    title: "WTTA & Basic Contract",
     period: "Sep – Dec 2026",
-    sprints: "Sprints 13–18",
-    color: "oklch(0.65 0.18 145)",
-    status: "⏰ Jan 1, 2027",
-    statusBadge: "badge-covered",
-    description: "The final phase runs concurrently with Phase 2. Pay Transparency reporting is built in the Analytics cluster. ISO 27001 certification is the culmination of the security programme that began in Sprint 3.",
+    sprints: "Sprints 11–16",
+    deadline: "Jan 1, 2027",
+    accentColor: "#ff9500",
+    statusLabel: "Hard Deadline",
+    description: "Build the two January 2027 compliance features in parallel: WTTA agency certification hard-block and the new basic contract engine.",
     deliverables: [
-      { name: "Pay Gap Data Model Design", team: "Data Science", priority: "warning" },
-      { name: "Disaggregated Pay Reporting Module", team: "Engineering", priority: "warning" },
-      { name: "ISO 27001 ISMS Documentation", team: "Security / Legal", priority: "warning" },
-      { name: "External ISO 27001 Certification Audit", team: "Third Party", priority: "warning" },
+      { name: "Agency Register (certified/uncertified status)", team: "Engineering", priority: "critical" },
+      { name: "WTTA API Integration (NLA registry)", team: "Engineering", priority: "critical" },
+      { name: "Scheduling Hard-Block Engine", team: "Engineering", priority: "critical" },
+      { name: "Basic Contract Type (min hours guarantee)", team: "Engineering", priority: "critical" },
+      { name: "Payroll Connector Update", team: "Engineering", priority: "warning" },
+      { name: "Zero-Hour Contract Migration Tool", team: "Engineering / HR", priority: "warning" },
     ],
-    milestone: "Pay Transparency Deadline + ISO 27001 Certified",
+    standards: ["WTTA 2027", "Wet meer zekerheid flexwerkers"],
+    teams: ["Backend", "HR Systems", "Payroll Integration", "Legal"],
+    criticalPath: "NLA API availability uncertain — design CSV fallback from Sprint 10.",
+  },
+  {
+    id: "P4",
+    label: "Phase 4",
+    title: "Pay Transparency & ISO 27001",
+    period: "Jan – Jun 2027",
+    sprints: "Sprints 17–24",
+    deadline: "Jan 2027 (NL implementation)",
+    accentColor: "#0071e3",
+    statusLabel: "Planned",
+    description: "Complete the Pay Transparency reporting module and achieve ISO 27001 certification — the enterprise procurement gate for major clients.",
+    deliverables: [
+      { name: "Gender Pay Gap Data Model", team: "Data Engineering", priority: "warning" },
+      { name: "Pay Transparency Report Builder", team: "Engineering", priority: "warning" },
+      { name: "ISO 27001 External Certification Audit", team: "Security / External Auditor", priority: "warning" },
+      { name: "SOC 2 Type II Readiness Assessment", team: "Security", priority: "info" },
+    ],
+    standards: ["Pay Transparency Directive", "ISO 27001", "SOC 2 Type II"],
+    teams: ["Data Engineering", "HR", "Security", "External Auditor"],
   },
 ];
 
 const risks = [
   {
-    risk: "Works Council consultation delay",
+    risk: "Works Council consultation delayed",
     probability: "Medium",
     impact: "High",
     mitigation: "Start informal OR engagement in Sprint 3, before formal consultation begins in Sprint 7.",
@@ -103,112 +115,193 @@ const risks = [
 ];
 
 export default function RoadmapSection() {
-  const [activePhase, setActivePhase] = useState("P0");
+  const [activePhase, setActivePhase] = useState("P1");
   const active = phases.find((p) => p.id === activePhase)!;
 
   return (
-    <section id="roadmap" className="py-24 relative overflow-hidden" style={{ background: "oklch(0.10 0.012 255)" }}>
-      <div className="absolute top-0 right-0 section-number" style={{ transform: "translate(5%, -10%)" }}>07</div>
-
-      <div className="container relative z-10">
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-blue-400/50" />
-            <span className="text-blue-400/70 text-xs tracking-widest uppercase" style={{ fontFamily: "Space Mono, monospace" }}>Chapter 07</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ fontFamily: "Syne, sans-serif" }}>
-            18-Month Roadmap
+    <section id="roadmap" className="section-white" style={{ padding: "100px 0 120px" }}>
+      <div className="container">
+        {/* Header */}
+        <div style={{ maxWidth: "680px", marginBottom: "64px" }}>
+          <div className="section-eyebrow">Chapter 07 — 18-Month Roadmap</div>
+          <h2
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+              color: "#1d1d1f",
+              lineHeight: 1.1,
+              marginBottom: "1rem",
+            }}
+          >
+            Four phases to full compliance
           </h2>
-          <p className="text-white/55 text-lg max-w-2xl" style={{ fontFamily: "Manrope, sans-serif" }}>
-            Four sequenced phases governed by a single principle: prioritise by nearest regulatory deadline. Click each phase to see the full sprint breakdown.
+          <p style={{ fontSize: "1.05rem", color: "#6e6e73", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
+            The sequence is governed by three rules: nearest hard deadline first, foundation before superstructure, and the one overdue obligation (GDPR breach notification) starts immediately.
           </p>
         </div>
 
-        {/* Timeline bar */}
-        <div className="relative mb-10">
-          <div className="flex items-stretch gap-0 rounded-xl overflow-hidden" style={{ border: "1px solid oklch(1 0 0 / 10%)" }}>
-            {phases.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => setActivePhase(p.id)}
-                className="flex-1 p-4 text-left transition-all duration-200"
+        {/* Timeline selector */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "4px",
+            marginBottom: "32px",
+          }}
+        >
+          {phases.map((p) => (
+            <button
+              key={p.id}
+              onClick={() => setActivePhase(p.id)}
+              style={{
+                padding: "16px 20px",
+                borderRadius: "14px",
+                textAlign: "left",
+                cursor: "pointer",
+                background: activePhase === p.id ? p.accentColor : "#f5f5f7",
+                border: "none",
+                transition: "all 0.2s ease",
+                borderTop: `3px solid ${activePhase === p.id ? "transparent" : p.accentColor}`,
+              }}
+            >
+              <div style={{ fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: activePhase === p.id ? "rgba(255,255,255,0.7)" : "#aeaeb2", marginBottom: "4px" }}>
+                {p.sprints}
+              </div>
+              <div style={{ fontWeight: 700, fontSize: "0.9rem", color: activePhase === p.id ? "#ffffff" : "#1d1d1f", marginBottom: "2px", letterSpacing: "-0.01em" }}>
+                {p.title}
+              </div>
+              <div style={{ fontSize: "0.75rem", color: activePhase === p.id ? "rgba(255,255,255,0.75)" : "#8e8e93", marginBottom: "10px" }}>
+                {p.period}
+              </div>
+              <span
                 style={{
-                  background: activePhase === p.id ? `${p.color}20` : "oklch(0.13 0.014 255)",
-                  borderRight: "1px solid oklch(1 0 0 / 8%)",
-                  borderBottom: activePhase === p.id ? `3px solid ${p.color}` : "3px solid transparent",
+                  fontSize: "0.65rem",
+                  fontWeight: 600,
+                  padding: "2px 8px",
+                  borderRadius: "100px",
+                  background: activePhase === p.id ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.06)",
+                  color: activePhase === p.id ? "#ffffff" : "#6e6e73",
                 }}
               >
-                <div className="text-xs font-mono mb-1" style={{ color: p.color, fontFamily: "Space Mono, monospace" }}>{p.id}</div>
-                <div className="font-bold text-white text-xs mb-1 leading-snug" style={{ fontFamily: "Syne, sans-serif" }}>{p.label}</div>
-                <div className="text-white/40 text-xs" style={{ fontFamily: "Manrope, sans-serif" }}>{p.period}</div>
-              </button>
-            ))}
-          </div>
+                {p.statusLabel}
+              </span>
+            </button>
+          ))}
         </div>
 
         {/* Active phase detail */}
-        <div className="glass-card p-8 mb-12" style={{ borderTop: `3px solid ${active.color}` }}>
-          <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+        <div
+          className="apple-card"
+          style={{ padding: "40px", marginBottom: "56px", borderTop: `3px solid ${active.accentColor}` }}
+        >
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "48px", alignItems: "start" }}>
             <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-2xl font-extrabold" style={{ fontFamily: "Syne, sans-serif", color: active.color }}>{active.id}</span>
-                <h3 className="text-xl font-bold text-white" style={{ fontFamily: "Syne, sans-serif" }}>{active.label}</h3>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+                <span style={{ fontSize: "1.4rem", fontWeight: 800, color: active.accentColor, letterSpacing: "-0.04em" }}>{active.label}</span>
+                <span style={{ fontSize: "1.1rem", fontWeight: 700, color: "#1d1d1f", letterSpacing: "-0.02em" }}>{active.title}</span>
               </div>
-              <div className="flex flex-wrap gap-4 text-xs text-white/40" style={{ fontFamily: "Space Mono, monospace" }}>
-                <span>📅 {active.period}</span>
-                <span>🔄 {active.sprints}</span>
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="text-xs text-white/40 mb-1" style={{ fontFamily: "Space Mono, monospace" }}>Deadline</div>
-              <span className={active.statusBadge} style={{ fontSize: "0.7rem" }}>{active.status}</span>
-            </div>
-          </div>
+              <p style={{ fontSize: "0.95rem", color: "#6e6e73", lineHeight: 1.7, marginBottom: "28px" }}>{active.description}</p>
 
-          <p className="text-white/60 mb-8 leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>{active.description}</p>
-
-          <div>
-            <div className="text-xs uppercase tracking-wider text-white/40 mb-4" style={{ fontFamily: "Space Mono, monospace" }}>Deliverables</div>
-            <div className="space-y-3">
-              {active.deliverables.map((d, i) => (
-                <div key={i} className="flex items-center justify-between p-3 rounded-lg" style={{ background: "oklch(1 0 0 / 4%)", border: "1px solid oklch(1 0 0 / 8%)" }}>
-                  <div className="flex items-center gap-3">
-                    <span className={d.priority === "critical" ? "badge-critical" : d.priority === "warning" ? "badge-warning" : "badge-info"} style={{ fontSize: "0.55rem" }}>
-                      {d.priority}
-                    </span>
-                    <span className="text-white/80 text-sm font-medium" style={{ fontFamily: "Manrope, sans-serif" }}>{d.name}</span>
+              <div style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aeaeb2", marginBottom: "12px" }}>Deliverables</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "24px" }}>
+                {active.deliverables.map((d, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "10px 14px",
+                      borderRadius: "10px",
+                      background: "#f5f5f7",
+                      gap: "12px",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <span className={d.priority === "critical" ? "badge-critical" : d.priority === "warning" ? "badge-warning" : "badge-info"} style={{ fontSize: "0.6rem" }}>
+                        {d.priority}
+                      </span>
+                      <span style={{ fontSize: "0.875rem", color: "#3a3a3c", fontWeight: 500 }}>{d.name}</span>
+                    </div>
+                    <span style={{ fontSize: "0.72rem", color: "#aeaeb2", flexShrink: 0, fontFamily: "monospace" }}>{d.team}</span>
                   </div>
-                  <span className="text-white/35 text-xs shrink-0 ml-4" style={{ fontFamily: "Space Mono, monospace" }}>{d.team}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+                ))}
+              </div>
 
-          <div className="mt-6 p-4 rounded-lg" style={{ background: `${active.color}15`, border: `1px solid ${active.color}30` }}>
-            <div className="text-xs uppercase tracking-wider mb-1" style={{ fontFamily: "Space Mono, monospace", color: active.color }}>Phase Milestone</div>
-            <div className="font-semibold text-white text-sm" style={{ fontFamily: "Manrope, sans-serif" }}>⚡ {active.milestone}</div>
+              {active.criticalPath && (
+                <div
+                  style={{
+                    background: "rgba(255,149,0,0.06)",
+                    border: "1px solid rgba(255,149,0,0.2)",
+                    borderRadius: "10px",
+                    padding: "14px 16px",
+                  }}
+                >
+                  <div style={{ fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#b8690a", marginBottom: "4px" }}>Critical Path Risk</div>
+                  <div style={{ fontSize: "0.825rem", color: "#3a3a3c" }}>{active.criticalPath}</div>
+                </div>
+              )}
+            </div>
+
+            <div>
+              <div style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aeaeb2", marginBottom: "8px" }}>Deadline</div>
+              <div style={{ fontWeight: 700, fontSize: "1rem", color: active.accentColor, marginBottom: "24px", fontFamily: "monospace" }}>{active.deadline}</div>
+
+              <div style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aeaeb2", marginBottom: "10px" }}>Standards</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "24px" }}>
+                {active.standards.map((s, i) => (
+                  <span key={i} style={{ fontSize: "0.72rem", padding: "4px 10px", borderRadius: "6px", background: "#f5f5f7", color: "#6e6e73", border: "1px solid #e5e5ea", fontWeight: 500, fontFamily: "monospace" }}>
+                    {s}
+                  </span>
+                ))}
+              </div>
+
+              <div style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aeaeb2", marginBottom: "10px" }}>Teams</div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                {active.teams.map((t, i) => (
+                  <span key={i} style={{ fontSize: "0.72rem", padding: "4px 10px", borderRadius: "6px", background: `${active.accentColor}10`, color: active.accentColor, border: `1px solid ${active.accentColor}25`, fontWeight: 600 }}>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Risk register */}
-        <h3 className="text-xl font-bold text-white mb-6" style={{ fontFamily: "Syne, sans-serif" }}>
+        <h3 style={{ fontSize: "1.2rem", fontWeight: 700, color: "#1d1d1f", marginBottom: "20px", letterSpacing: "-0.02em" }}>
           Programme Risk Register
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {risks.map((r, i) => (
-            <div key={i} className="glass-card p-5">
-              <div className="flex items-start justify-between mb-3">
-                <h4 className="font-bold text-white text-sm pr-4" style={{ fontFamily: "Syne, sans-serif" }}>{r.risk}</h4>
-                <div className="flex gap-2 shrink-0">
-                  <span className={r.probability === "High" ? "badge-critical" : r.probability === "Medium" ? "badge-warning" : "badge-covered"} style={{ fontSize: "0.55rem" }}>P: {r.probability}</span>
-                  <span className={r.impact === "Critical" || r.impact === "High" ? "badge-critical" : "badge-warning"} style={{ fontSize: "0.55rem" }}>I: {r.impact}</span>
-                </div>
-              </div>
-              <p className="text-blue-400/70 text-xs leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>
-                <strong className="text-white/60">Mitigation:</strong> {r.mitigation}
-              </p>
-            </div>
-          ))}
+        <div className="apple-card" style={{ overflow: "hidden" }}>
+          <table className="apple-table">
+            <thead>
+              <tr>
+                <th>Risk</th>
+                <th>Probability</th>
+                <th>Impact</th>
+                <th>Mitigation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {risks.map((r, i) => (
+                <tr key={i}>
+                  <td style={{ fontWeight: 500, color: "#1d1d1f" }}>{r.risk}</td>
+                  <td>
+                    <span className={r.probability === "High" ? "badge-critical" : r.probability === "Medium" ? "badge-warning" : "badge-covered"}>
+                      {r.probability}
+                    </span>
+                  </td>
+                  <td>
+                    <span className={r.impact === "Critical" || r.impact === "High" ? "badge-critical" : "badge-warning"}>
+                      {r.impact}
+                    </span>
+                  </td>
+                  <td style={{ color: "#6e6e73", fontSize: "0.825rem" }}>{r.mitigation}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

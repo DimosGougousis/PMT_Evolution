@@ -1,25 +1,26 @@
+/* ============================================================
+   PMT SaaS Strategy and Roadmap
+   Design Philosophy: Apple.com — Precision, Restraint, Premium
+   Core Principles:
+   - White/near-white backgrounds with subtle grey differentiation
+   - SF Pro Display / Inter as system font stack
+   - Generous whitespace as a design element
+   - Colour used sparingly: only for accent and status
+   - Typography does the heavy lifting — weight contrast over colour
+   - Borders: 1px #E5E5EA (Apple's exact separator colour)
+   - Shadows: ultra-soft, never dramatic
+   ============================================================ */
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
-/* ============================================================
-   DESIGN SYSTEM: Dark Command Centre
-   Philosophy: High-stakes operations dashboard aesthetic.
-   Deep charcoal base, electric blue accents, red/amber/green
-   status system. Glassmorphism cards. Syne + Manrope typography.
-   ============================================================ */
-
 @theme inline {
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Manrope', sans-serif;
-  --font-mono: 'Space Mono', monospace;
-
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -44,83 +45,62 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 :root {
-  --radius: 0.5rem;
+  /* Apple colour system */
+  --apple-blue: #0071e3;
+  --apple-blue-hover: #0077ed;
+  --apple-red: #ff3b30;
+  --apple-orange: #ff9500;
+  --apple-green: #34c759;
+  --apple-grey-1: #8e8e93;
+  --apple-grey-2: #aeaeb2;
+  --apple-grey-3: #c7c7cc;
+  --apple-grey-4: #d1d1d6;
+  --apple-grey-5: #e5e5ea;
+  --apple-grey-6: #f2f2f7;
 
-  /* Dark Command Centre Palette */
-  --background: oklch(0.10 0.012 255);
-  --foreground: oklch(0.93 0.005 255);
-  --card: oklch(0.14 0.015 255);
-  --card-foreground: oklch(0.93 0.005 255);
-  --popover: oklch(0.14 0.015 255);
-  --popover-foreground: oklch(0.93 0.005 255);
-
-  /* Electric Blue primary */
-  --primary: oklch(0.60 0.20 255);
-  --primary-foreground: oklch(0.98 0 0);
-
-  --secondary: oklch(0.18 0.015 255);
-  --secondary-foreground: oklch(0.80 0.005 255);
-
-  --muted: oklch(0.18 0.012 255);
-  --muted-foreground: oklch(0.55 0.010 255);
-
-  --accent: oklch(0.60 0.20 255);
-  --accent-foreground: oklch(0.98 0 0);
-
-  /* Red for critical/destructive */
-  --destructive: oklch(0.60 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
-
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.60 0.20 255);
-
-  /* Chart colours: blue, green, amber, red, purple */
-  --chart-1: oklch(0.60 0.20 255);
-  --chart-2: oklch(0.65 0.18 145);
-  --chart-3: oklch(0.75 0.18 75);
-  --chart-4: oklch(0.60 0.22 25);
-  --chart-5: oklch(0.60 0.20 300);
-
-  --sidebar: oklch(0.12 0.014 255);
-  --sidebar-foreground: oklch(0.93 0.005 255);
-  --sidebar-primary: oklch(0.60 0.20 255);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.18 0.015 255);
-  --sidebar-accent-foreground: oklch(0.93 0.005 255);
-  --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.60 0.20 255);
+  /* Semantic tokens */
+  --radius: 0.75rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.12 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.12 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.12 0 0);
+  --primary: oklch(0.48 0.18 255);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.12 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+  --accent: oklch(0.96 0 0);
+  --accent-foreground: oklch(0.12 0 0);
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.90 0 0);
+  --input: oklch(0.90 0 0);
+  --ring: oklch(0.48 0.18 255);
+  --chart-1: oklch(0.48 0.18 255);
+  --chart-2: oklch(0.58 0.22 25);
+  --chart-3: oklch(0.65 0.18 145);
+  --chart-4: oklch(0.72 0.16 75);
+  --chart-5: oklch(0.55 0.005 255);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  html {
-    scroll-behavior: smooth;
-  }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Manrope', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Syne', sans-serif;
+    -moz-osx-font-smoothing: grayscale;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
   a[href] {
     @apply cursor-pointer;
   }
@@ -134,109 +114,170 @@
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-  .flex {
-    min-height: 0;
-    min-width: 0;
+  @media (min-width: 640px) {
+    .container { padding-left: 2rem; padding-right: 2rem; }
   }
-  @media (min-width: 768px) {
-    .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
+  @media (min-width: 1024px) {
+    .container { padding-left: 3rem; padding-right: 3rem; max-width: 1200px; }
   }
-  @media (min-width: 1280px) {
-    .container {
-      max-width: 1320px;
-      padding-left: 3rem;
-      padding-right: 3rem;
-    }
+  .flex { min-height: 0; min-width: 0; }
+
+  /* Apple-style card */
+  .apple-card {
+    background: #ffffff;
+    border: 1px solid #e5e5ea;
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .apple-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+    transform: translateY(-1px);
   }
 
-  /* Glassmorphism card */
-  .glass-card {
-    background: oklch(1 0 0 / 5%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid oklch(1 0 0 / 10%);
-    border-radius: 0.75rem;
-  }
+  /* Apple-style section — alternating white / #F5F5F7 */
+  .section-white { background: #ffffff; }
+  .section-grey  { background: #f5f5f7; }
 
-  /* Status badges */
+  /* Apple-style pill badge */
+  .apple-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
   .badge-critical {
-    background: oklch(0.60 0.22 25 / 20%);
-    color: oklch(0.75 0.18 25);
-    border: 1px solid oklch(0.60 0.22 25 / 40%);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 0.25rem;
+    background: rgba(255, 59, 48, 0.10);
+    color: #c0392b;
+    border: 1px solid rgba(255, 59, 48, 0.20);
+    display: inline-flex; align-items: center;
+    padding: 3px 10px; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600;
   }
   .badge-warning {
-    background: oklch(0.75 0.18 75 / 20%);
-    color: oklch(0.85 0.16 75);
-    border: 1px solid oklch(0.75 0.18 75 / 40%);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 0.25rem;
+    background: rgba(255, 149, 0, 0.10);
+    color: #b8690a;
+    border: 1px solid rgba(255, 149, 0, 0.22);
+    display: inline-flex; align-items: center;
+    padding: 3px 10px; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600;
   }
   .badge-covered {
-    background: oklch(0.65 0.18 145 / 20%);
-    color: oklch(0.75 0.16 145);
-    border: 1px solid oklch(0.65 0.18 145 / 40%);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 0.25rem;
+    background: rgba(52, 199, 89, 0.10);
+    color: #1a7a35;
+    border: 1px solid rgba(52, 199, 89, 0.22);
+    display: inline-flex; align-items: center;
+    padding: 3px 10px; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600;
   }
   .badge-info {
-    background: oklch(0.60 0.20 255 / 20%);
-    color: oklch(0.72 0.18 255);
-    border: 1px solid oklch(0.60 0.20 255 / 40%);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
+    background: rgba(0, 113, 227, 0.08);
+    color: #0071e3;
+    border: 1px solid rgba(0, 113, 227, 0.18);
+    display: inline-flex; align-items: center;
+    padding: 3px 10px; border-radius: 100px;
+    font-size: 0.7rem; font-weight: 600;
+  }
+
+  /* Apple-style CTA button */
+  .apple-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #0071e3;
+    color: #ffffff;
+    border-radius: 980px;
+    padding: 10px 22px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.2s ease;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .apple-btn:hover { background: #0077ed; }
+
+  .apple-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: #0071e3;
+    border-radius: 980px;
+    padding: 10px 22px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid #0071e3;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .apple-btn-outline:hover { background: rgba(0,113,227,0.06); }
+
+  /* Apple-style section label */
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 0.25rem;
+    color: #0071e3;
+    margin-bottom: 0.75rem;
   }
 
-  /* Section number watermark */
-  .section-number {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(6rem, 15vw, 14rem);
-    color: oklch(1 0 0 / 3%);
-    line-height: 1;
-    user-select: none;
-    pointer-events: none;
+  /* Apple-style divider */
+  .apple-divider {
+    border: none;
+    border-top: 1px solid #e5e5ea;
+    margin: 0;
   }
 
-  /* Scroll reveal animation */
+  /* Scroll reveal */
   .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* Progress bar */
-  #progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, oklch(0.60 0.20 255), oklch(0.65 0.18 145));
-    z-index: 9999;
-    transition: width 0.1s linear;
+  /* Apple-style stat number */
+  .apple-stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #1d1d1f;
+    line-height: 1;
   }
+
+  /* Table styles */
+  .apple-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .apple-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8e8e93;
+    background: #f5f5f7;
+    border-bottom: 1px solid #e5e5ea;
+  }
+  .apple-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f2f2f7;
+    color: #1d1d1f;
+    vertical-align: top;
+  }
+  .apple-table tr:last-child td { border-bottom: none; }
+  .apple-table tr:hover td { background: #fafafa; }
 }

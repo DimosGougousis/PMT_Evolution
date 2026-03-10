@@ -1,4 +1,4 @@
-/* Design: Dark Command Centre — main page assembling all strategy sections */
+/* Design: Apple.com — light theme, white/grey alternating sections */
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import MarketContext from "@/components/MarketContext";
@@ -12,7 +12,6 @@ import Footer from "@/components/Footer";
 import { useEffect } from "react";
 
 export default function Home() {
-  // Scroll reveal observer for all .reveal elements
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -24,13 +23,12 @@ export default function Home() {
       },
       { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
-
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="min-h-screen" style={{ background: "oklch(0.10 0.012 255)" }}>
+    <div className="min-h-screen" style={{ background: "#ffffff" }}>
       <Navigation />
       <HeroSection />
       <MarketContext />

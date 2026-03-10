@@ -1,6 +1,4 @@
-/* Design: Dark Command Centre — market context with key insight cards */
-import { useReveal } from "@/hooks/useReveal";
-
+/* Design: Apple.com — clean white section, light grey cards, dark text */
 const drivers = [
   {
     icon: "⚖️",
@@ -52,55 +50,103 @@ const badgeLabelMap: Record<string, string> = {
 };
 
 export default function MarketContext() {
-  const { ref } = useReveal();
-
   return (
-    <section id="market-context" className="py-24 relative overflow-hidden" style={{ background: "oklch(0.11 0.013 255)" }}>
-      {/* Section number watermark */}
-      <div className="absolute top-0 right-0 section-number select-none pointer-events-none" style={{ transform: "translate(5%, -10%)" }}>01</div>
-
-      <div className="container relative z-10">
-        <div ref={ref} className="reveal mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-blue-400/50" />
-            <span className="text-blue-400/70 text-xs tracking-widest uppercase" style={{ fontFamily: "Space Mono, monospace" }}>Chapter 01</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4" style={{ fontFamily: "Syne, sans-serif" }}>
-            Market Context
+    <section id="market-context" className="section-white" style={{ padding: "100px 0" }}>
+      <div className="container">
+        {/* Header */}
+        <div style={{ maxWidth: "680px", marginBottom: "64px" }}>
+          <div className="section-eyebrow">Chapter 01 — Market Context</div>
+          <h2
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+              color: "#1d1d1f",
+              lineHeight: 1.1,
+              marginBottom: "1rem",
+            }}
+          >
+            Six forces reshaping the market
           </h2>
-          <p className="text-white/55 text-lg max-w-2xl" style={{ fontFamily: "Manrope, sans-serif" }}>
-            The Dutch supermarket sector operates at the intersection of high labour intensity, strict regulation, and rapid technological change. Six structural forces are reshaping the workforce management software market.
+          <p style={{ fontSize: "1.05rem", color: "#6e6e73", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
+            The Dutch supermarket sector operates at the intersection of high labour intensity, strict regulation, and rapid technological change. Understanding these drivers is the foundation of the product strategy.
           </p>
         </div>
 
-        {/* Key market facts bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14 p-6 rounded-xl" style={{ background: "oklch(0.14 0.015 255)", border: "1px solid oklch(1 0 0 / 8%)" }}>
+        {/* Key facts bar */}
+        <div
+          className="apple-card"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            marginBottom: "56px",
+            overflow: "hidden",
+            borderRadius: "18px",
+          }}
+        >
           {[
             { value: "~100,000", label: "AH employees in NL" },
             { value: "€10,000+", label: "ATW fine per incident" },
             { value: "4%", label: "Max GDPR fine (global turnover)" },
             { value: "Jan 2027", label: "Next regulatory cliff-edge" },
           ].map((fact, i) => (
-            <div key={i} className="text-center">
-              <div className="text-xl md:text-2xl font-bold text-blue-400 mb-1" style={{ fontFamily: "Syne, sans-serif" }}>{fact.value}</div>
-              <div className="text-xs text-white/45" style={{ fontFamily: "Manrope, sans-serif" }}>{fact.label}</div>
+            <div
+              key={i}
+              style={{
+                padding: "2rem 1.5rem",
+                textAlign: "center",
+                borderRight: i < 3 ? "1px solid #e5e5ea" : "none",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "1.75rem",
+                  fontWeight: 700,
+                  letterSpacing: "-0.03em",
+                  color: "#0071e3",
+                  marginBottom: "0.4rem",
+                }}
+              >
+                {fact.value}
+              </div>
+              <div style={{ fontSize: "0.78rem", color: "#8e8e93", fontWeight: 500 }}>{fact.label}</div>
             </div>
           ))}
         </div>
 
         {/* Driver cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+            gap: "16px",
+          }}
+        >
           {drivers.map((d, i) => (
-            <div
-              key={i}
-              className="glass-card p-6 hover:border-white/20 transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <span className="text-2xl">{d.icon}</span>
+            <div key={i} className="apple-card" style={{ padding: "28px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
+                  marginBottom: "14px",
+                }}
+              >
+                <span style={{ fontSize: "1.8rem" }}>{d.icon}</span>
                 <span className={badgeMap[d.badge]}>{badgeLabelMap[d.badge]}</span>
               </div>
-              <h3 className="font-bold text-white mb-2 text-base" style={{ fontFamily: "Syne, sans-serif" }}>{d.title}</h3>
-              <p className="text-white/55 text-sm leading-relaxed" style={{ fontFamily: "Manrope, sans-serif" }}>{d.body}</p>
+              <h3
+                style={{
+                  fontWeight: 600,
+                  fontSize: "1rem",
+                  color: "#1d1d1f",
+                  marginBottom: "8px",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                {d.title}
+              </h3>
+              <p style={{ fontSize: "0.875rem", color: "#6e6e73", lineHeight: 1.65 }}>{d.body}</p>
             </div>
           ))}
         </div>
