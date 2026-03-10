@@ -87,7 +87,7 @@ export default function GapAnalysis() {
               marginBottom: "1rem",
             }}
           >
-            Where the platform falls short
+            Mission Critical Areas
           </h2>
           <p style={{ fontSize: "1.05rem", color: "#6e6e73", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
             Four critical gaps represent time-bound, existential risks to the platform's legality. Each has a quantifiable fine exposure and a defined build requirement.
