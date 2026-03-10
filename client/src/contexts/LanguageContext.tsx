@@ -46,7 +46,7 @@ const translations: Record<Language, any> = {
       links: ["Executive Brief", "Market Context", "Software Clusters", "Architecture", "Regulatory", "Gap Analysis", "Compliance Cost", "Roadmap"],
     },
     hero: {
-      badge: "Board Strategy Briefing — March 2026",
+      badge: "Draft Strategy Briefing — March 2026",
       title1: "PMT SaaS Strategy",
       title2: "and Roadmap",
       subtitle: "A comprehensive product strategy for the Dutch supermarket workforce management platform — covering software architecture, regulatory compliance, and the 18-month delivery roadmap.",
@@ -222,7 +222,7 @@ const translations: Record<Language, any> = {
       links: ["Samenvatting", "Marktcontext", "Softwareclusters", "Architectuur", "Regelgeving", "Lacune-analyse", "Nalevingskosten", "Roadmap"],
     },
     hero: {
-      badge: "Bestuursstrategie Briefing — Maart 2026",
+      badge: "Concept Strategie Briefing — Maart 2026",
       title1: "PMT SaaS Strategie",
       title2: "en Roadmap",
       subtitle: "Een uitgebreide productstrategie voor het Nederlandse supermarkt personeelsplanningsplatform — inclusief softwarearchitectuur, regelgevingsnaleving en de 18-maanden leveringsroadmap.",
