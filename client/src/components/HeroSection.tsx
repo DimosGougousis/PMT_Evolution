@@ -1,20 +1,17 @@
 /* Design: Apple.com — large centred headline, light background, generous whitespace */
 import { useEffect, useState } from "react";
-
-const stats = [
-  { value: "7", label: "Software Clusters" },
-  { value: "4", label: "Critical Compliance Gaps" },
-  { value: "€290M", label: "Max Fine Exposure" },
-  { value: "Jan 2027", label: "Next Regulatory Cliff" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
+  const { t } = useLanguage();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 100);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setVisible(true), 100);
+    return () => clearTimeout(timer);
   }, []);
+
+  const stats: { value: string; label: string }[] = t("hero.stats");
 
   return (
     <section
@@ -47,7 +44,7 @@ export default function HeroSection() {
           transition: "opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1)",
         }}
       >
-        {/* Eyebrow */}
+        {/* Eyebrow badge */}
         <div
           style={{
             display: "inline-flex",
@@ -61,8 +58,8 @@ export default function HeroSection() {
           }}
         >
           <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#0071e3", display: "inline-block" }} />
-          <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "#0071e3", letterSpacing: "0.04em" }}>
-            BOARD STRATEGY BRIEFING — MARCH 2026
+          <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "#0071e3", letterSpacing: "0.04em", textTransform: "uppercase" }}>
+            {t("hero.badge")}
           </span>
         </div>
 
@@ -77,9 +74,9 @@ export default function HeroSection() {
             marginBottom: "1.5rem",
           }}
         >
-          PMT SaaS Strategy
+          {t("hero.title1")}
           <br />
-          <span style={{ color: "#0071e3" }}>and Roadmap</span>
+          <span style={{ color: "#0071e3" }}>{t("hero.title2")}</span>
         </h1>
 
         {/* Subtitle */}
@@ -90,11 +87,16 @@ export default function HeroSection() {
             color: "#6e6e73",
             lineHeight: 1.6,
             maxWidth: "640px",
-            margin: "0 auto 2.5rem",
+            margin: "0 auto 0.75rem",
             letterSpacing: "-0.01em",
           }}
         >
-          A comprehensive product strategy for the Dutch supermarket workforce management platform — covering software architecture, regulatory compliance, and the 18-month delivery roadmap.
+          {t("hero.subtitle")}
+        </p>
+
+        {/* Author */}
+        <p style={{ fontSize: "0.8rem", color: "#aeaeb2", marginBottom: "2.5rem", letterSpacing: "0.01em" }}>
+          {t("hero.author")}
         </p>
 
         {/* CTA buttons */}
@@ -103,13 +105,13 @@ export default function HeroSection() {
             className="apple-btn"
             onClick={() => document.getElementById("market-context")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Explore the Strategy ↓
+            {t("hero.cta1")} ↓
           </button>
           <button
             className="apple-btn-outline"
             onClick={() => document.getElementById("gap-analysis")?.scrollIntoView({ behavior: "smooth" })}
           >
-            View Gap Analysis
+            {t("hero.cta2")}
           </button>
         </div>
 
@@ -147,14 +149,7 @@ export default function HeroSection() {
               >
                 {s.value}
               </div>
-              <div
-                style={{
-                  fontSize: "0.72rem",
-                  color: "#8e8e93",
-                  fontWeight: 500,
-                  letterSpacing: "0.01em",
-                }}
-              >
+              <div style={{ fontSize: "0.72rem", color: "#8e8e93", fontWeight: 500, letterSpacing: "0.01em" }}>
                 {s.label}
               </div>
             </div>

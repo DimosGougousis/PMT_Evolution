@@ -1,61 +1,19 @@
 /* Design: Apple.com — clean white section, light grey cards, dark text */
-const drivers = [
-  {
-    icon: "⚖️",
-    title: "Regulatory Complexity",
-    body: "Dutch supermarket operators navigate a multi-layered compliance stack: EU Working Time Directive, ATW, CAO Supermarkt, GDPR, and four incoming laws by January 2027. Manual processes cannot keep pace.",
-    badge: "critical",
-  },
-  {
-    icon: "👥",
-    title: "Flex Workforce Dependency",
-    body: "AH and comparable chains rely on a large flex pool — uitzendkrachten, oproepkrachten, and min-max contract workers — to absorb demand volatility. Managing this pool without software leads to systematic compliance failures.",
-    badge: "warning",
-  },
-  {
-    icon: "🤖",
-    title: "AI-Driven Scheduling",
-    body: "AI-powered demand forecasting and auto-rostering is now table stakes. However, the EU AI Act classifies workforce scheduling AI as high-risk, creating new obligations that most vendors have not yet addressed.",
-    badge: "warning",
-  },
-  {
-    icon: "📊",
-    title: "Labour Cost Pressure",
-    body: "Labour is the largest controllable cost for a supermarket operator. A 1% improvement in scheduling efficiency on a €500M payroll delivers €5M in savings. The business case for optimisation software is unambiguous.",
-    badge: "covered",
-  },
-  {
-    icon: "🔒",
-    title: "Data Privacy at Scale",
-    body: "Scheduling data is personal data. Biometric time-tracking, health-related absence data, and behavioural patterns are all in scope for GDPR. The Dutch AP is one of Europe's most active enforcement authorities.",
-    badge: "critical",
-  },
-  {
-    icon: "🏢",
-    title: "Works Council Rights",
-    body: "The Dutch Works Council (OR) has formal co-determination rights over any system that monitors or evaluates employee performance. Software deployment without OR consultation is legally void.",
-    badge: "warning",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const badgeMap: Record<string, string> = {
-  critical: "badge-critical",
-  warning: "badge-warning",
-  covered: "badge-covered",
-};
-const badgeLabelMap: Record<string, string> = {
-  critical: "Critical",
-  warning: "Monitor",
-  covered: "Opportunity",
-};
+const icons = ["⚖️", "👥", "🤖", "📊"];
 
 export default function MarketContext() {
+  const { t } = useLanguage();
+  const cards: { title: string; body: string }[] = t("market.cards");
+  const gapItems: { law: string; date: string; impact: string; badge: string; badgeLabel: string }[] = t("market.gaps.items");
+
   return (
     <section id="market-context" className="section-white" style={{ padding: "100px 0" }}>
       <div className="container">
         {/* Header */}
         <div style={{ maxWidth: "680px", marginBottom: "64px" }}>
-          <div className="section-eyebrow">Chapter 01 — Market Context</div>
+          <div className="section-eyebrow">{t("market.eyebrow")}</div>
           <h2
             style={{
               fontSize: "clamp(2rem, 4vw, 3rem)",
@@ -66,75 +24,25 @@ export default function MarketContext() {
               marginBottom: "1rem",
             }}
           >
-            Six forces reshaping the market
+            {t("market.title")}
           </h2>
           <p style={{ fontSize: "1.05rem", color: "#6e6e73", lineHeight: 1.7, letterSpacing: "-0.01em" }}>
-            The Dutch supermarket sector operates at the intersection of high labour intensity, strict regulation, and rapid technological change. Understanding these drivers is the foundation of the product strategy.
+            {t("market.subtitle")}
           </p>
-        </div>
-
-        {/* Key facts bar */}
-        <div
-          className="apple-card"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            marginBottom: "56px",
-            overflow: "hidden",
-            borderRadius: "18px",
-          }}
-        >
-          {[
-            { value: "~100,000", label: "AH employees in NL" },
-            { value: "€10,000+", label: "ATW fine per incident" },
-            { value: "4%", label: "Max GDPR fine (global turnover)" },
-            { value: "Jan 2027", label: "Next regulatory cliff-edge" },
-          ].map((fact, i) => (
-            <div
-              key={i}
-              style={{
-                padding: "2rem 1.5rem",
-                textAlign: "center",
-                borderRight: i < 3 ? "1px solid #e5e5ea" : "none",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "1.75rem",
-                  fontWeight: 700,
-                  letterSpacing: "-0.03em",
-                  color: "#0071e3",
-                  marginBottom: "0.4rem",
-                }}
-              >
-                {fact.value}
-              </div>
-              <div style={{ fontSize: "0.78rem", color: "#8e8e93", fontWeight: 500 }}>{fact.label}</div>
-            </div>
-          ))}
         </div>
 
         {/* Driver cards */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
             gap: "16px",
+            marginBottom: "64px",
           }}
         >
-          {drivers.map((d, i) => (
+          {cards.map((d, i) => (
             <div key={i} className="apple-card" style={{ padding: "28px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "space-between",
-                  marginBottom: "14px",
-                }}
-              >
-                <span style={{ fontSize: "1.8rem" }}>{d.icon}</span>
-                <span className={badgeMap[d.badge]}>{badgeLabelMap[d.badge]}</span>
-              </div>
+              <span style={{ fontSize: "1.8rem", display: "block", marginBottom: "14px" }}>{icons[i]}</span>
               <h3
                 style={{
                   fontWeight: 600,
@@ -149,6 +57,49 @@ export default function MarketContext() {
               <p style={{ fontSize: "0.875rem", color: "#6e6e73", lineHeight: 1.65 }}>{d.body}</p>
             </div>
           ))}
+        </div>
+
+        {/* Gap callout */}
+        <div className="apple-card" style={{ padding: "40px", borderLeft: "4px solid #ff3b30" }}>
+          <h3
+            style={{
+              fontSize: "1.3rem",
+              fontWeight: 700,
+              color: "#1d1d1f",
+              letterSpacing: "-0.02em",
+              marginBottom: "0.5rem",
+            }}
+          >
+            {t("market.gaps.title")}
+          </h3>
+          <p style={{ fontSize: "0.95rem", color: "#6e6e73", lineHeight: 1.65, marginBottom: "1.5rem" }}>
+            {t("market.gaps.subtitle")}
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {gapItems.map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "16px",
+                  padding: "16px",
+                  background: "#f5f5f7",
+                  borderRadius: "12px",
+                }}
+              >
+                <div style={{ flexShrink: 0 }}>
+                  <span className={item.badge}>{item.badgeLabel}</span>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 600, fontSize: "0.9rem", color: "#1d1d1f", marginBottom: "2px" }}>
+                    {item.law} — {item.date}
+                  </div>
+                  <div style={{ fontSize: "0.83rem", color: "#6e6e73", lineHeight: 1.5 }}>{item.impact}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

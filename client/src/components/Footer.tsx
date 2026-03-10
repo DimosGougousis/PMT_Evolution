@@ -1,5 +1,9 @@
 /* Design: Apple.com — clean minimal footer with Dimos Gougousis authorship */
+import { useLanguage } from "@/contexts/LanguageContext";
+
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer
       style={{
@@ -37,45 +41,31 @@ export default function Footer() {
               >
                 <span style={{ color: "white", fontWeight: 700, fontSize: "10px" }}>PMT</span>
               </div>
-              <span
-                style={{
-                  fontWeight: 600,
-                  fontSize: "0.9rem",
-                  color: "#1d1d1f",
-                  letterSpacing: "-0.01em",
-                }}
-              >
+              <span style={{ fontWeight: 600, fontSize: "0.9rem", color: "#1d1d1f", letterSpacing: "-0.01em" }}>
                 PMT SaaS Strategy and Roadmap
               </span>
             </div>
-            <p
-              style={{
-                fontSize: "0.78rem",
-                color: "#8e8e93",
-                maxWidth: "320px",
-                lineHeight: 1.6,
-              }}
-            >
-              Shift and Resource Management platform strategy for the Dutch supermarket sector. Prepared for board-level review.
+            <p style={{ fontSize: "0.78rem", color: "#8e8e93", maxWidth: "320px", lineHeight: 1.6 }}>
+              {t("footer.description")}
             </p>
           </div>
 
           {/* Meta */}
           <div style={{ textAlign: "right" }}>
             <div style={{ fontSize: "0.7rem", color: "#aeaeb2", marginBottom: "4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
-              Author
+              {t("footer.authorLabel")}
             </div>
             <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "#1d1d1f", marginBottom: "12px" }}>
               Dimos Gougousis
             </div>
             <div style={{ fontSize: "0.7rem", color: "#aeaeb2", marginBottom: "4px", letterSpacing: "0.04em", textTransform: "uppercase" }}>
-              Classification
+              {t("footer.classificationLabel")}
             </div>
             <div style={{ fontSize: "0.78rem", color: "#6e6e73" }}>
-              Internal — Confidential
+              {t("footer.classification")}
             </div>
             <div style={{ fontSize: "0.72rem", color: "#aeaeb2", marginTop: "8px" }}>
-              Version 1.0 · March 2026
+              {t("footer.version")}
             </div>
           </div>
         </div>
@@ -94,10 +84,10 @@ export default function Footer() {
           }}
         >
           <p style={{ fontSize: "0.72rem", color: "#aeaeb2", lineHeight: 1.6, maxWidth: "600px" }}>
-            Research basis: Dutch ATW · CAO Supermarkt · GDPR · EU AI Act · WTTA · Wet meer zekerheid flexwerkers · Pay Transparency Directive
+            {t("footer.research")}
           </p>
           <p style={{ fontSize: "0.72rem", color: "#aeaeb2" }}>
-            Standards: ISO 27001 · ISO 42001 · SOC 2 · NIST CSF 2.0 · TOGAF 10
+            {t("footer.standards")}
           </p>
         </div>
       </div>
